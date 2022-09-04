@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Graph.css';
-import './ActivityTile';
+import ActivityTiles from './ActivityTiles';
 
 const Graph = () => {
 	//TODO fix this fucking rendering
@@ -64,6 +64,7 @@ const Graph = () => {
 					{produceTDS('Sunday')}
 				</tbody>
 			</table>
+			<ActivityTiles />
 		</div>
 	);
 };

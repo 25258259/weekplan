@@ -1,0 +1,14 @@
+.activity-tile {
+	position: relative;
+	height: 56px;
+	width: 56px;
+	color: white;
+	background-color: red;
+	border-radius: 20px;
+	margin: 2px;
+	text-align: center;
+	font-size: 26px;
+	float: left;
+	/* oversize + 60px */
+	line-height: 56px;
+}

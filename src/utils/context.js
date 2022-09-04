@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useReducer } from 'react';
 import { reducer } from './reducer';
-import { weekplan } from './weekplan';
+import { weekplan, Weekplan } from './weekplan';
 
 const AppContext = React.createContext();
 
@@ -31,13 +31,15 @@ const AppProvider = ({ children }) => {
 
 	const getCurrentActivity = () => {
 		const day = new Date().getDay();
-		const dayName = numberToDay[day];
+		const todayName = numberToDay[day];
 		const [presentHour, presentMinutes] = getDateInFithteens();
 		let currentActivity = 'Sleep?';
+		const schedule = planState.weekplan.find(
+			(element) => element.dayName === todayName
+		).schedule;
 
-		const result = planState.weekplan[dayName].forEach((element) => {
+		const result = schedule.map((element) => {
 			const [start, end, activity] = element;
-
 			const [hourStart, minutesStart] = start
 				.split(':')
 				.map((x) => parseInt(x));
@@ -51,12 +53,17 @@ const AppProvider = ({ children }) => {
 				currentActivity = activity;
 			}
 		});
-
 		return currentActivity;
 	};
 
+	const getWeekplan = () => {
+		const weekplan = new Map(Object.entries(planState.weekplan));
+		return weekplan;
+	};
+
 	return (
-		<AppContext.Provider value={{ getCurrentActivity }}>
+		<AppContext.Provider
+			value={{ getCurrentActivity, getWeekplan, weekplan }}>
 			{children}
 		</AppContext.Provider>
 	);

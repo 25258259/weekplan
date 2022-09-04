@@ -3,14 +3,17 @@ import '../styles/Main.css';
 import Graph from './Graph';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useGlobalContext } from '../utils/context';
+import { activityColors } from '../utils/weekplan';
 
 const Main = () => {
-	const [activity, setActivity] = useState('Sleeping');
+	const [activity, setActivity] = useState('Sleep?');
 	const { getCurrentActivity } = useGlobalContext();
-
+	const [color, setColor] = useState('black');
 	useEffect(() => {
 		const findNewTime = setInterval(() => {
-			setActivity(getCurrentActivity());
+			const newActivity = getCurrentActivity();
+			setActivity(newActivity);
+			setColor(activityColors(newActivity));
 		}, 5000);
 		return () => clearInterval(findNewTime);
 	}, []);
@@ -35,7 +38,14 @@ const Main = () => {
 				<h1>Current month: {month[new Date().getMonth()]}</h1>
 				<br />
 				<h1>
-					Current activity: <span>{activity}</span>
+					Current activity:{' '}
+					<span
+						style={{
+							backgroundColor: color,
+							color: color === 'black' ? 'white' : 'black',
+						}}>
+						{activity}
+					</span>
 				</h1>
 			</div>
 			<div className='arrow left-arrow'>

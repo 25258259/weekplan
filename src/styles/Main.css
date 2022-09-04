@@ -1,4 +1,10 @@
+@font-face {
+	font-family: 'Nunito';
+	src: url('../utils/static/Nunito-Regular.ttf');
+}
+
 * {
+	font-family: 'Nunito';
 	margin: 0;
 	box-sizing: border-box;
 }

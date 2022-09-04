@@ -1,0 +1,7 @@
+.activity-div {
+	min-width: 4000px;
+	max-width: 4000px;
+	background-color: black;
+	position: relative;
+	z-index: 25;
+}
